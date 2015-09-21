@@ -7,5 +7,6 @@
     <string name="welcome_to_puzzle_text">Large Text</string>
     <string name="welcome_to_puzzle_screen">Welcome to Michael\'s Puzzle</string>
     <string name="title_activity_puzzle">Puzzle</string>
+    <string name="finished_puzzle">Picture of the solved puzzle</string>
 
 </resources>

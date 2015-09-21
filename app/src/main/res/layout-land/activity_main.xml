@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/spartyImage"
+            android:layout_gravity="center|left"
+            android:src="@drawable/sparty"
+            android:padding="20dp"
+            android:contentDescription="@string/finished_puzzle"
+            android:onClick="onStartPuzzle" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|right"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/welcome_to_puzzle_screen"
+            android:id="@+id/textWelcome"
+            android:layout_gravity="center_horizontal|bottom"
+            android:gravity="center"
+            android:layout_margin="40dp"
+            android:padding="10dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_puzzle"
+            android:id="@+id/buttonStart"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="onStartPuzzle"
+            android:paddingBottom="0dp"
+            android:layout_marginBottom="20dp"
+            android:layout_margin="40dp"
+            android:padding="10dp" />
+
+    </FrameLayout>
+
+</LinearLayout>
