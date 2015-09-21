@@ -6,16 +6,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import java.util.ArrayList;
+
 /**
- * Created by mhw on 9/21/15.
+ * This class represents our puzzle.
  */
 public class Puzzle {
-
-    /**
-     * Completed puzzle bitmap
-     */
-    private Bitmap puzzleComplete;
-
     /**
      * Paint for filling the area the puzzle is in
      */
@@ -25,6 +21,16 @@ public class Puzzle {
      * Paint for outlining the area the puzzle is in
      */
     private Paint outlinePaint;
+
+    /**
+     * Completed puzzle bitmap
+     */
+    private Bitmap puzzleComplete;
+
+    /**
+     * Collection of puzzle pieces
+     */
+    public ArrayList<PuzzlePiece> pieces = new ArrayList<PuzzlePiece>();
 
     /**
      * Percentage of the display width or height that
@@ -38,13 +44,12 @@ public class Puzzle {
         // be solved in.
         fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         fillPaint.setColor(0xffcccccc);
-        // Load the solved puzzle image
-        puzzleComplete =
-                BitmapFactory.decodeResource(context.getResources(),
-                        R.drawable.sparty_done);
-        int hit = puzzleComplete.getHeight();
-        int wid = puzzleComplete.getWidth();
 
+        // Load the solved puzzle image
+        puzzleComplete = BitmapFactory.decodeResource(context.getResources(), R.drawable.sparty_done);
+
+        // Load the puzzle pieces
+        pieces.add(new PuzzlePiece(context, R.drawable.sparty1, 0.259f, 0.238f));
     }
 
     public void draw(Canvas canvas) {
@@ -66,13 +71,17 @@ public class Puzzle {
         //
 
         canvas.drawRect(marginX, marginY, marginX + puzzleSize, marginY + puzzleSize, fillPaint);
-        // Compute the factor which the drawing will be scaled to
-        float scaleFactor = (float)puzzleSize /
-                (float)puzzleComplete.getWidth();
+
+        float scaleFactor = (float)puzzleSize / (float)puzzleComplete.getWidth();
+
         canvas.save();
         canvas.translate(marginX, marginY);
         canvas.scale(scaleFactor, scaleFactor);
-        //canvas.drawBitmap(puzzleComplete, 0, 0, null);
+        //   canvas.drawBitmap(puzzleComplete, 0, 0, null);
         canvas.restore();
+
+        for(PuzzlePiece piece : pieces) {
+            piece.draw(canvas, marginX, marginY, puzzleSize, scaleFactor);
+        }
     }
 }
