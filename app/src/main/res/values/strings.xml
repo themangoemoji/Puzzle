@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">Puzzle wrigh517</string>
+    <string name="start_puzzle">Start Puzzle</string>
+    <string name="welcome_to_puzzle_text">Large Text</string>
+    <string name="welcome_to_puzzle_screen">Welcome to Michael\'s Puzzle</string>
+    <string name="title_activity_puzzle">Puzzle</string>
+
+</resources>
