@@ -2,16 +2,17 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:baselineAligned="false">
 
     <FrameLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="left"
         android:layout_weight="1">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/spartyImage"
             android:layout_gravity="center|left"
@@ -33,7 +34,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/welcome_to_puzzle_screen"
             android:id="@+id/textWelcome"
-            android:layout_gravity="center_horizontal|bottom"
+            android:layout_gravity="center|bottom"
             android:gravity="center"
             android:layout_margin="40dp"
             android:padding="10dp" />
@@ -43,7 +44,7 @@
             android:layout_height="wrap_content"
             android:text="@string/start_puzzle"
             android:id="@+id/buttonStart"
-            android:layout_gravity="center_horizontal|top"
+            android:layout_gravity="center"
             android:onClick="onStartPuzzle"
             android:paddingBottom="0dp"
             android:layout_marginBottom="20dp"
