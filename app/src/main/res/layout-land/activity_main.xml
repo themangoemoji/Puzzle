@@ -37,19 +37,22 @@
             android:layout_gravity="center|bottom"
             android:gravity="center"
             android:layout_margin="40dp"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="100dp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/start_puzzle"
             android:id="@+id/buttonStart"
-            android:layout_gravity="center"
+            android:layout_gravity="center|top"
             android:onClick="onStartPuzzle"
             android:paddingBottom="0dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="50dp"
             android:layout_margin="40dp"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:layout_marginTop="60dp" />
 
     </FrameLayout>
 
