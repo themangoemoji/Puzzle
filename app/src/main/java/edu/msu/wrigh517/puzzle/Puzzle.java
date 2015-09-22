@@ -69,7 +69,7 @@ public class Puzzle {
 
         int puzzleSize = (int)(minDim * SCALE_IN_VIEW);
         // Extend the size of the border past the size of the puzzle
-        int borderSize = 4;
+        int borderSize = 10;
         int borderAdjustment = puzzleSize + borderSize;
 
         // Compute the margins so we center the puzzle
