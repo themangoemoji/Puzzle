@@ -40,6 +40,8 @@ public class PuzzleActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_shuffle:
+                getPuzzleView().getPuzzle().shuffle();
+                getPuzzleView().invalidate();
                 return true;
 
             default:

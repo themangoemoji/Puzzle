@@ -72,5 +72,8 @@ public class PuzzleView extends View {
         puzzle.loadInstanceState(bundle);
     }
 
+    public Puzzle getPuzzle() {
+        return puzzle;
+    }
 
 }
