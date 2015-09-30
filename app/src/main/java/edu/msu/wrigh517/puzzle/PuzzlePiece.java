@@ -45,6 +45,16 @@ public class PuzzlePiece {
      */
     final static float SNAP_DISTANCE = 0.05f;
 
+    /**
+     * The puzzle piece ID
+     */
+    private int id;
+
+    /*
+    * **********************************************************
+    * **********************************************************
+     */
+
     public float getX() {
         return x;
     }
@@ -146,6 +156,7 @@ public class PuzzlePiece {
     public PuzzlePiece(Context context, int id, float finalX, float finalY) {
         this.finalX = finalX;
         this.finalY = finalY;
+        this.id = id;
 
         piece = BitmapFactory.decodeResource(context.getResources(), id);
     }
@@ -176,4 +187,11 @@ public class PuzzlePiece {
     }
 
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 }

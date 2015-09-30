@@ -91,6 +91,17 @@ public class Puzzle {
     private static Random random = new Random();
 
     /**
+     * The name of the bundle keys to save the puzzle
+     */
+    private final static String LOCATIONS = "Puzzle.locations";
+    private final static String IDS = "Puzzle.ids";
+
+        /*
+    * ************************************************************************************
+    * ************************************************************************************
+     */
+
+    /**
      * Shuffle the puzzle pieces
      */
     public void shuffle() {
@@ -283,12 +294,54 @@ public class Puzzle {
             piece.draw(canvas, marginX, marginY, puzzleSize, scaleFactor);
         }
     }
-    
+
     /**
      * Save the puzzle to a bundle
      * @param bundle The bundle we save to
      */
     public void saveInstanceState(Bundle bundle) {
+        float [] locations = new float[pieces.size() * 2];
+        int [] ids = new int[pieces.size()];
+        for(int i=0;  i<pieces.size(); i++) {
+            PuzzlePiece piece = pieces.get(i);
+            locations[i*2] = piece.getX();
+            locations[i*2+1] = piece.getY();
+            ids[i] = piece.getId();
+        }
+        bundle.putFloatArray(LOCATIONS, locations);
+        bundle.putIntArray(IDS,  ids);
 
+    }
+
+    /**
+     * Read the puzzle from a bundle
+     * @param bundle The bundle we save to
+     */
+    public void loadInstanceState(Bundle bundle) {
+        float [] locations = bundle.getFloatArray(LOCATIONS);
+        int [] ids = bundle.getIntArray(IDS);
+
+        for(int i=0; i<ids.length-1; i++) {
+
+            // Find the corresponding piece
+            // We don't have to test if the piece is at i already,
+            // since the loop below will fall out without it moving anything
+            for(int j=i+1;  j<ids.length;  j++) {
+                if(ids[i] == pieces.get(j).getId()) {
+                    // We found it
+                    // Yah...
+                    // Swap the pieces
+                    PuzzlePiece t = pieces.get(i);
+                    pieces.set(i, pieces.get(j));
+                    pieces.set(j, t);
+                }
+            }
+        }
+
+        for(int i=0;  i<pieces.size(); i++) {
+            PuzzlePiece piece = pieces.get(i);
+            piece.setX(locations[i*2]);
+            piece.setY(locations[i*2+1]);
+        }
     }
 }

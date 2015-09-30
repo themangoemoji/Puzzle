@@ -11,6 +11,11 @@ public class PuzzleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puzzle);
+
+        if(savedInstanceState != null) {
+            // We have saved state
+            getPuzzleView().loadInstanceState(savedInstanceState);
+        }
     }
 
     /**
@@ -21,8 +26,7 @@ public class PuzzleActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);
 
-        PuzzleView view = (PuzzleView)this.findViewById(R.id.puzzleView);
-        view.saveInstanceState(bundle);
+        getPuzzleView().saveInstanceState(bundle);
     }
 
     @Override
@@ -34,16 +38,20 @@ public class PuzzleActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.menu_shuffle:
+                return true;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    /**
+     * Get the puzzle view
+     * @return PuzzleView reference
+     */
+    private PuzzleView getPuzzleView() {
+        return (PuzzleView)this.findViewById(R.id.puzzleView);
     }
 }

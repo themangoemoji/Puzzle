@@ -13,12 +13,15 @@ import android.view.View;
  */
 public class PuzzleView extends View {
 
-
-
     /**
      * The actual puzzle
      */
     private Puzzle puzzle;
+
+      /*
+    * ************************************************************************************
+    * ************************************************************************************
+     */
 
     /**
      * Save the puzzle to a bundle
@@ -27,8 +30,6 @@ public class PuzzleView extends View {
     public void saveInstanceState(Bundle bundle) {
         puzzle.saveInstanceState(bundle);
     }
-
-
 
     public PuzzleView(Context context) {
         super(context);
@@ -55,13 +56,20 @@ public class PuzzleView extends View {
 
     }
 
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         puzzle.draw(canvas);
 
+    }
+
+    /**
+     * Load the puzzle from a bundle
+     * @param bundle The bundle we save to
+     */
+    public void loadInstanceState(Bundle bundle) {
+        puzzle.loadInstanceState(bundle);
     }
 
 
