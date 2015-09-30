@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * This class represents our puzzle.
@@ -131,6 +132,9 @@ public class Puzzle {
                 dragging = pieces.get(p);
                 lastRelX = x;
                 lastRelY = y;
+                int grab = pieces.indexOf(p);
+
+
                 return true;
             }
         }
@@ -149,6 +153,8 @@ public class Puzzle {
         if(dragging != null) {
             if(dragging.maybeSnap()) {
                 // We have snapped into place
+                pieces.remove(pieces.indexOf(dragging));
+                pieces.add(0, dragging);
                 view.invalidate();
 
                 if(isDone()) {
@@ -168,6 +174,7 @@ public class Puzzle {
                     alertDialog.show();
                 }
             }
+
             dragging = null;
             return true;
         }
@@ -205,6 +212,9 @@ public class Puzzle {
                     dragging.move(relX - lastRelX, relY - lastRelY);
                     lastRelX = relX;
                     lastRelY = relY;
+                    pieces.remove(pieces.indexOf(dragging));
+                    pieces.add(dragging);
+                    //pieces.set(pieces.size(), dragging);
                     view.invalidate();
                     return true;
                 }
