@@ -81,6 +81,20 @@ public class Puzzle {
      */
     private int marginY;
 
+    /**
+     * Determine if the puzzle is done!
+     * @return true if puzzle is done
+     */
+    public boolean isDone() {
+        for(PuzzlePiece piece : pieces) {
+            if(!piece.isSnapped()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public Puzzle(Context context) {
 
         // Create paint for filling the area the puzzle will
@@ -117,6 +131,32 @@ public class Puzzle {
 
         return false;
     }
+
+    /**
+     * Handle a release of a touch message.
+     * @param x x location for the touch release, relative to the puzzle - 0 to 1 over the puzzle
+     * @param y y location for the touch release, relative to the puzzle - 0 to 1 over the puzzle
+     * @return true if the touch is handled
+     */
+    private boolean onReleased(View view, float x, float y) {
+
+        if(dragging != null) {
+            if(dragging.maybeSnap()) {
+                // We have snapped into place
+                view.invalidate();
+
+                if(isDone()) {
+                    // The puzzle is done
+                    Log.i("Puzzle", "Puzzle complete");
+                }
+            }
+            dragging = null;
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Handle a touch event from the view.
      * @param view The view that is the source of the touch
@@ -139,11 +179,7 @@ public class Puzzle {
 
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
-                if(dragging != null) {
-                    dragging = null;
-                    return true;
-                }
-                break;
+                return onReleased(view, relX, relY);
 
             case MotionEvent.ACTION_MOVE:
                 // If we are dragging, move the piece and force a redraw

@@ -37,6 +37,40 @@ public class PuzzlePiece {
     private float finalY;
 
     /**
+     * We consider a piece to be in the right location if within
+     * this distance.
+     */
+    final static float SNAP_DISTANCE = 0.05f;
+
+    /**
+     * Determine if this piece is snapped in place
+     * @return true if snapped into place
+     */
+    public boolean isSnapped() {
+        if (this.maybeSnap())
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * If we are within SNAP_DISTANCE of the correct
+     * answer, snap to the correct answer exactly.
+     * @return
+     */
+    public boolean maybeSnap() {
+        if(Math.abs(x - finalX) < SNAP_DISTANCE &&
+                Math.abs(y - finalY) < SNAP_DISTANCE) {
+
+            x = finalX;
+            y = finalY;
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Test to see if we have touched a puzzle piece
      * @param testX X location as a normalized coordinate (0 to 1)
      * @param testY Y location as a normalized coordinate (0 to 1)
