@@ -2,6 +2,7 @@ package edu.msu.wrigh517.puzzle;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,10 +13,21 @@ import android.view.View;
  */
 public class PuzzleView extends View {
 
+
+
     /**
      * The actual puzzle
      */
     private Puzzle puzzle;
+
+    /**
+     * Save the puzzle to a bundle
+     * @param bundle The bundle we save to
+     */
+    public void saveInstanceState(Bundle bundle) {
+        puzzle.saveInstanceState(bundle);
+    }
+
 
 
     public PuzzleView(Context context) {

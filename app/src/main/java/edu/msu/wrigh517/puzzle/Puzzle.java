@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -13,6 +14,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 /**
  * This class represents our puzzle.
@@ -84,6 +86,20 @@ public class Puzzle {
     private int marginY;
 
     /**
+     * Random number generator
+     */
+    private static Random random = new Random();
+
+    /**
+     * Shuffle the puzzle pieces
+     */
+    public void shuffle() {
+        for(PuzzlePiece piece : pieces) {
+            piece.shuffle(random);
+        }
+    }
+
+    /**
      * Determine if the puzzle is done!
      * @return true if puzzle is done
      */
@@ -115,6 +131,7 @@ public class Puzzle {
         pieces.add(new PuzzlePiece(context, R.drawable.sparty4, 0.341f, 0.519f));
         pieces.add(new PuzzlePiece(context, R.drawable.sparty5, 0.718f, 0.834f));
         pieces.add(new PuzzlePiece(context, R.drawable.sparty6, 0.310f, 0.761f));
+        shuffle();
     }
     /**
      * Handle a touch message. This is when we get an initial touch
@@ -265,5 +282,13 @@ public class Puzzle {
         for(PuzzlePiece piece : pieces) {
             piece.draw(canvas, marginX, marginY, puzzleSize, scaleFactor);
         }
+    }
+    
+    /**
+     * Save the puzzle to a bundle
+     * @param bundle The bundle we save to
+     */
+    public void saveInstanceState(Bundle bundle) {
+
     }
 }

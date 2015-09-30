@@ -13,6 +13,18 @@ public class PuzzleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_puzzle);
     }
 
+    /**
+     * Save the instance state into a bundle
+     * @param bundle the bundle to save into
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+
+        PuzzleView view = (PuzzleView)this.findViewById(R.id.puzzleView);
+        view.saveInstanceState(bundle);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

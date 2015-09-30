@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.os.Bundle;
+
+import java.util.Random;
 
 /**
  * This class represents one piece of our puzzle.
@@ -41,6 +44,39 @@ public class PuzzlePiece {
      * this distance.
      */
     final static float SNAP_DISTANCE = 0.05f;
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    /**
+     * Save the puzzle to a bundle
+     * @param bundle The bundle we save to
+     */
+    public void saveInstanceState(Bundle bundle) {
+
+    }
+
+    /**
+     * Shuffle the location of this piece
+     * @param rand A random number generator
+     */
+    public void shuffle(Random rand) {
+        x = rand.nextFloat();
+        y = rand.nextFloat();
+    }
 
     /**
      * Determine if this piece is snapped in place
@@ -138,5 +174,6 @@ public class PuzzlePiece {
         canvas.drawBitmap(piece, 0, 0, null);
         canvas.restore();
     }
+
 
 }
