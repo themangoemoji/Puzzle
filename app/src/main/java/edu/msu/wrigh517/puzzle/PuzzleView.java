@@ -2,8 +2,8 @@ package edu.msu.wrigh517.puzzle;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 
@@ -31,6 +31,11 @@ public class PuzzleView extends View {
     public PuzzleView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs, defStyle);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return puzzle.onTouchEvent(this, event);
     }
 
     private void init(AttributeSet attrs, int defStyle) {

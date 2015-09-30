@@ -19,12 +19,12 @@ public class PuzzlePiece {
      * We use relative x locations in the range 0-1 for the center
      * of the puzzle piece.
      */
-    private float x = 0;
+    private float x = 0.26f;
 
     /**
      * y location
      */
-    private float y = 0;
+    private float y = 0.24f;
 
     /**
      * x location when the puzzle is solved
@@ -35,6 +35,43 @@ public class PuzzlePiece {
      * y location when the puzzle is solved
      */
     private float finalY;
+
+    /**
+     * Test to see if we have touched a puzzle piece
+     * @param testX X location as a normalized coordinate (0 to 1)
+     * @param testY Y location as a normalized coordinate (0 to 1)
+     * @param puzzleSize the size of the puzzle in pixels
+     * @param scaleFactor the amount to scale a piece by
+     * @return true if we hit the piece
+     */
+    public boolean hit(float testX, float testY,
+                       int puzzleSize, float scaleFactor) {
+
+        // Make relative to the location and size to the piece size
+        int pX = (int)((testX - x) * puzzleSize / scaleFactor) +
+                piece.getWidth() / 2;
+        int pY = (int)((testY - y) * puzzleSize / scaleFactor) +
+                piece.getHeight() / 2;
+
+        if(pX < 0 || pX >= piece.getWidth() ||
+                pY < 0 || pY >= piece.getHeight()) {
+            return false;
+        }
+
+        // We are within the rectangle of the piece.
+        // Are we touching actual picture?
+        return (piece.getPixel(pX, pY) & 0xff000000) != 0;
+    }
+
+    /**
+     * Move the puzzle piece by dx, dy
+     * @param dx x amount to move
+     * @param dy y amount to move
+     */
+    public void move(float dx, float dy) {
+        x += dx;
+        y += dy;
+    }
 
     public PuzzlePiece(Context context, int id, float finalX, float finalY) {
         this.finalX = finalX;
