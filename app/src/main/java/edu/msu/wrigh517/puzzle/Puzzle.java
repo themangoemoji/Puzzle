@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -108,6 +109,11 @@ public class Puzzle {
 
         // Load the puzzle pieces
         pieces.add(new PuzzlePiece(context, R.drawable.sparty1, 0.259f, 0.238f));
+        pieces.add(new PuzzlePiece(context, R.drawable.sparty2, 0.666f, 0.158f));
+        pieces.add(new PuzzlePiece(context, R.drawable.sparty3, 0.741f, 0.501f));
+        pieces.add(new PuzzlePiece(context, R.drawable.sparty4, 0.341f, 0.519f));
+        pieces.add(new PuzzlePiece(context, R.drawable.sparty5, 0.718f, 0.834f));
+        pieces.add(new PuzzlePiece(context, R.drawable.sparty6, 0.310f, 0.761f));
     }
     /**
      * Handle a touch message. This is when we get an initial touch
@@ -147,7 +153,19 @@ public class Puzzle {
 
                 if(isDone()) {
                     // The puzzle is done
-                    Log.i("Puzzle", "Puzzle complete");
+                    // The puzzle is done
+                    // Instantiate a dialog box builder
+                    AlertDialog.Builder builder =
+                            new AlertDialog.Builder(view.getContext());
+
+                    // Parameterize the builder
+                    builder.setTitle(R.string.hurrah);
+                    builder.setMessage(R.string.completed_puzzle);
+                    builder.setPositiveButton(android.R.string.ok, null);
+
+                    // Create the dialog box and show it
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }
             }
             dragging = null;
