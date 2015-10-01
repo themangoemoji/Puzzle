@@ -112,6 +112,10 @@ public class Puzzle {
         for(PuzzlePiece piece : pieces) {
             piece.shuffle(random);
         }
+        if (pieces.size() == 7) {
+            pieces.remove(6);
+            puzzleview.invalidate();
+        }
     }
 
     /**
@@ -196,7 +200,7 @@ public class Puzzle {
                 if(isDone()) {
                     Log.i("Puzzle Size: ", String.valueOf(pieces.size()));
                     // The puzzle is done
-                    pieces.add(new PuzzlePiece(view.getContext(), R.drawable.sparty_done, marginX, marginY));
+                    pieces.add(new PuzzlePiece(view.getContext(), R.drawable.sparty_done, 0.001f, 0.001f));
                     view.invalidate();
                     // Instantiate a dialog box builder
                     AlertDialog.Builder builder =
