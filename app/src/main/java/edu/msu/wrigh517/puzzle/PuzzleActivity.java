@@ -53,7 +53,15 @@ public class PuzzleActivity extends AppCompatActivity {
      * Get the puzzle view
      * @return PuzzleView reference
      */
-    private PuzzleView getPuzzleView() {
+    PuzzleView getPuzzleView() {
         return (PuzzleView)this.findViewById(R.id.puzzleView);
     }
+
+    PuzzleActivity getPuzzleActivity() {
+        return this;
+    }
+
+
+
+
 }

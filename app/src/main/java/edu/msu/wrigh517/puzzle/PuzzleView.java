@@ -18,6 +18,11 @@ public class PuzzleView extends View {
      */
     private Puzzle puzzle;
 
+    /**
+     * The actual puzzle
+     */
+    private PuzzleActivity puzzleActivity;
+
       /*
     * ************************************************************************************
     * ************************************************************************************
@@ -53,6 +58,7 @@ public class PuzzleView extends View {
 
     private void init(AttributeSet attrs, int defStyle) {
         puzzle = new Puzzle(getContext());
+        puzzle.setPuzzleview(this);
 
     }
 
@@ -75,5 +81,11 @@ public class PuzzleView extends View {
     public Puzzle getPuzzle() {
         return puzzle;
     }
+
+    public PuzzleActivity getPuzzleActivity() {
+        return puzzleActivity;
+    }
+
+
 
 }

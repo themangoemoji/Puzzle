@@ -1,6 +1,7 @@
 package edu.msu.wrigh517.puzzle;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -44,6 +45,9 @@ public class Puzzle {
      */
     private Paint fillPaint;
 
+    private PuzzleView puzzleview;
+
+    private PuzzleActivity puzzleactivity;
     /**
      * Paint for outlining the area the puzzle is in
      */
@@ -151,7 +155,12 @@ public class Puzzle {
      * @return true if the touch is handled
      */
     private boolean onTouched(float x, float y) {
-
+        Log.i("Puzzle Size: ", String.valueOf(pieces.size()));
+        Log.i("Is Done?: ", String.valueOf(isDone()));
+        if (pieces.size() == 7) {
+            pieces.remove(6);
+            puzzleview.invalidate();
+        }
         // Check each piece to see if it has been hit
         // We do this in reverse order so we find the pieces in front
         for(int p=pieces.size()-1; p>=0;  p--) {
@@ -161,7 +170,6 @@ public class Puzzle {
                 lastRelX = x;
                 lastRelY = y;
                 int grab = pieces.indexOf(p);
-
 
                 return true;
             }
@@ -186,16 +194,20 @@ public class Puzzle {
                 view.invalidate();
 
                 if(isDone()) {
+                    Log.i("Puzzle Size: ", String.valueOf(pieces.size()));
                     // The puzzle is done
-                    // The puzzle is done
+                    pieces.add(new PuzzlePiece(view.getContext(), R.drawable.sparty_done, marginX, marginY));
+                    view.invalidate();
                     // Instantiate a dialog box builder
                     AlertDialog.Builder builder =
                             new AlertDialog.Builder(view.getContext());
+                    ShuffleListener listener = new ShuffleListener();
 
                     // Parameterize the builder
                     builder.setTitle(R.string.hurrah);
                     builder.setMessage(R.string.completed_puzzle);
                     builder.setPositiveButton(android.R.string.ok, null);
+                    builder.setNegativeButton(R.string.shuffle, listener);
 
                     // Create the dialog box and show it
                     AlertDialog alertDialog = builder.create();
@@ -208,6 +220,21 @@ public class Puzzle {
         }
 
         return false;
+    }
+
+    public void setPuzzleview(PuzzleView puzzleview) {
+        this.puzzleview = puzzleview;
+    }
+
+
+
+    private class ShuffleListener implements DialogInterface.OnClickListener {
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            shuffle();
+            puzzleview.invalidate();
+        }
     }
 
     /**
@@ -292,7 +319,9 @@ public class Puzzle {
 
         for(PuzzlePiece piece : pieces) {
             piece.draw(canvas, marginX, marginY, puzzleSize, scaleFactor);
+
         }
+
     }
 
     /**
@@ -344,4 +373,8 @@ public class Puzzle {
             piece.setY(locations[i*2+1]);
         }
     }
+
+
+
+
 }
