@@ -8,14 +8,14 @@
     <FrameLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         android:layout_weight="1">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/spartyImage"
-            android:layout_gravity="center|left"
+            android:layout_gravity="center|start"
             android:src="@drawable/sparty"
             android:padding="20dp"
             android:contentDescription="@string/finished_puzzle"
@@ -25,7 +25,7 @@
     <FrameLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal|right"
+        android:layout_gravity="center_horizontal|end"
         android:layout_weight="1">
 
         <TextView

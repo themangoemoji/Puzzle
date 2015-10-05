@@ -200,7 +200,7 @@ public class Puzzle {
                 if(isDone()) {
                     Log.i("Puzzle Size: ", String.valueOf(pieces.size()));
                     // The puzzle is done
-                    pieces.add(new PuzzlePiece(view.getContext(), R.drawable.sparty_done, 0.001f, 0.001f));
+                    pieces.add(new PuzzlePiece(view.getContext(), R.drawable.sparty_done, 250f, 250f));
                     view.invalidate();
                     // Instantiate a dialog box builder
                     AlertDialog.Builder builder =
